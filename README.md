@@ -1,56 +1,19 @@
 # macro_practice1
-Sub Macro1()
+Sub AddCal()
 '
-' Macro1 Macro
+' AddCal Macro
 '
 
 '
-    Range("B3:D5").Select
-    Selection.Borders(xlDiagonalDown).LineStyle = xlNone
-    Selection.Borders(xlDiagonalUp).LineStyle = xlNone
-    With Selection.Borders(xlEdgeLeft)
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-    With Selection.Borders(xlEdgeTop)
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-    With Selection.Borders(xlEdgeBottom)
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-    With Selection.Borders(xlEdgeRight)
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-    With Selection.Borders(xlInsideVertical)
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-    With Selection.Borders(xlInsideHorizontal)
-        .LineStyle = xlContinuous
-        .ColorIndex = 0
-        .TintAndShade = 0
-        .Weight = xlThin
-    End With
-    Range("B3:D3").Select
-    With Selection.Interior
-        .Pattern = xlSolid
-        .PatternColorIndex = xlAutomatic
-        .ThemeColor = xlThemeColorAccent2
-        .TintAndShade = 0.599993896298105
-        .PatternTintAndShade = 0
-    End With
+    Sheets("マスター").Select
+    Sheets("マスター").Copy After:=Sheets(2)
+    ActiveSheet.Name = Range("マスター!$D$2").Value & Range("マスター!$C$2").Value & Range("マスター!$D$3").Value & Range("マスター!$C$3").Value
+    Range("C2:I29").Select
+    Selection.Copy
+    Selection.PasteSpecial Paste:=xlPasteValues, Operation:=xlNone, SkipBlanks _
+        :=False, Transpose:=False
     Range("B5").Select
+    Application.CutCopyMode = False
+    ActiveCell.FormulaR1C1 = ""
+    Range("B4").Select
 End Sub
